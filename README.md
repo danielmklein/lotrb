@@ -30,10 +30,30 @@ require "lotrb"
 Lotrb.access_token = "your_access_token_here"
 
 # List all the movies
-Lotrb::Movie.list()
+# This returns a `ListObject` containing an array of the corresponding resource objects along with the pagination fields
+movies_response = Lotrb::Movie.list
+movies_response.results
+movies_response.pages 
 
 # Fetch a specific movie
-Lotrb::Movie.retrieve("some_movie_id")
+Lotrb::Movie.retrieve("5cd95395de30eff6ebccde5d")
+
+# Fetch the chapters from a book
+book = Lotrb::Book.list.results.last
+book.list_chapters
+
+# Pagination, sorting, and filtering all work by passing a hash of 
+# params to any `list` or `list_blahs` call.
+# These params map precisely to those described in [the API docs](https://the-one-api.dev/documentation)
+#
+# Paginate!
+Lotrb::Quote.list({ limit: 5, page: 75 })
+
+# Sort!
+Lotrb::Book.list({ sort: "name:asc" })
+
+# Filter!
+Lotrb::Character.list({ race: "Hobbit,Human" })
 ```
 
 ## Development
@@ -44,7 +64,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/lotrb. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/lotrb/blob/main/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/danielmklein/lotrb. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/danielmklein/lotrb/blob/main/CODE_OF_CONDUCT.md).
 
 ## License
 
@@ -52,4 +72,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Lotrb project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/lotrb/blob/main/CODE_OF_CONDUCT.md).
+Everyone interacting in the lotrb project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/danielmklein/lotrb/blob/main/CODE_OF_CONDUCT.md).

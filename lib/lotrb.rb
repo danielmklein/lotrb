@@ -4,7 +4,6 @@ require_relative "lotrb/version"
 
 require "lotrb/list_object"
 require "lotrb/resources"
-
 require "lotrb/util"
 
 module Lotrb
@@ -13,6 +12,5 @@ module Lotrb
 
   class << self
     attr_accessor :access_token
-
   end
 end

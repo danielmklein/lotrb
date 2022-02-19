@@ -1,8 +1,6 @@
 require "faraday"
 require "faraday_middleware"
 
-# client.connection.get("movie", {}, { Authorization: "Bearer #{Lotrb.access_token}" }).body["docs"]
-
 module Lotrb
   class Client
     BASE_URL = "https://the-one-api.dev/v2/"
@@ -26,12 +24,8 @@ module Lotrb
       end
     end
 
-    def inspect
-      "#<Lotrb::Client>"
-    end
-
-    def get(path, opts = {})
-      connection.get(path, opts, auth_header)
+    def get(path, params = {})
+      connection.get(path, params , auth_header)
     end
 
     private
